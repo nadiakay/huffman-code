@@ -25,7 +25,7 @@ function domTree(tree, len) {
 
   symbol.innerHTML = `symbol: ${tree.symbol}`;
   console.log(len);
-  freq.innerHTML = `probability: ${(tree.freq / len).toFixed(2)}`;
+  freq.innerHTML = `probability: ${(tree.freq / len).toFixed(3)}`; // do better
   list.appendChild(symbol);
   list.appendChild(freq);
   if (tree.node1) {
