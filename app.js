@@ -7,10 +7,37 @@ function getString() {
   const str = inputBox.value;
   const freqArr = getFrequency(str);
   const tree = makeTree(freqArr);
+  let h3 = document.createElement("h1");
+  h3.innerHTML = "Binary Tree:";
+  output.appendChild(h3);
   output.appendChild(domTree(tree[0], str.length));
+
+  const vals = document.createElement("div");
+  const h2 = document.createElement("h2");
+  h2.innerHTML = "Dictionary:";
+  vals.appendChild(h2);
+
+  dict = visitNode(tree[0], "");
+  dict.forEach(item => {
+    const p = document.createElement("p");
+    p.innerHTML = `${item[0]}: ${item[1]}`;
+    vals.appendChild(p);
+  });
+  output.appendChild(vals);
 }
 
 // make function to traverse tree and build binary dictionary
+
+function visitNode(node, prefix) {
+  dict = [];
+  if (node.node1) {
+    dict = [...dict, ...visitNode(node.node1, prefix.concat("0"))];
+    dict = [...dict, ...visitNode(node.node2, prefix.concat("1"))];
+    return dict;
+  } else {
+    return [...dict, [node.symbol, prefix]];
+  }
+}
 
 // clean this up
 function domTree(tree, len) {
