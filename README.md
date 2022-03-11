@@ -1,4 +1,2 @@
 # huffman-code
-Visualize Huffman coding algorithm
-
-wip
+in-browser visualization of the Huffman coding algorithm
