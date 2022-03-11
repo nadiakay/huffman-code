@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Huffman Encoding Demonstration</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Huffman Encoding Demonstration</title>
-</head>
-
-<body>
-  <h1>Huffman Encoding Demonstration</h1>
-  <p>enter a string of characters:</p>
-  <form action="javascript:void(0)">
-    <input type="textbox" id="str-in" placeholder="enter text">
-    <input type="submit" id="submit" value="Encode" />
-  </form>
-  <p id="out"></p>
-  <script src="app.js"></script>
-</body>
-
+  <body>
+    <h1>Huffman Encoding Demonstration</h1>
+    <p>enter a string of characters:</p>
+    <form action="javascript:void(0)">
+      <input type="textbox" id="str-in" placeholder="enter text" />
+      <input type="submit" id="submit" value="Encode" />
+    </form>
+    <p id="out"></p>
+    <h2>Binary Encoding:</h2>
+    <div id="code"></div>
+    <h2>Binary Tree:</h2>
+    <div id="tree"></div>
+    <h2>Dictionary:</h2>
+    <div id="dict"></div>
+    <script src="app.js"></script>
+  </body>
 </html>

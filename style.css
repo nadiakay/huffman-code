@@ -1,3 +1,10 @@
 ul {
   list-style-type: none;
 }
+
+.node-body {
+  padding: 10px;
+  border: solid 1px;
+  margin: 5px;
+  width: fit-content;
+}

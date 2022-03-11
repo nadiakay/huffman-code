@@ -1,58 +1,36 @@
-const inputBox = document.getElementById("str-in");
-const submitBtn = document.getElementById("submit");
+const textBox = document.getElementById("str-in");
+const submit = document.getElementById("submit");
 const output = document.getElementById("out");
+
+const codeDiv = document.getElementById("code");
+const treeDiv = document.getElementById("tree");
+const dictDiv = document.getElementById("dict");
 
 function getString() {
   output.innerHTML = "";
-  const str = inputBox.value;
+  const str = textBox.value;
   const freqArr = getFrequency(str);
   const tree = makeTree(freqArr);
-  let h3 = document.createElement("h1");
-  h3.innerHTML = "Binary Tree:";
-  output.appendChild(h3);
-  output.appendChild(domTree(tree[0], str.length));
-
-  const vals = document.createElement("div");
-  const h2 = document.createElement("h2");
-  h2.innerHTML = "Dictionary:";
-  vals.appendChild(h2);
+  treeDiv.appendChild(domTree(tree[0], str.length));
 
   dict = visitNode(tree[0], "");
   dict.forEach(item => {
     const p = document.createElement("p");
     p.innerHTML = `${item[0]}: ${item[1]}`;
-    vals.appendChild(p);
+    dictDiv.appendChild(p);
   });
-  output.appendChild(vals);
-}
-
-// make function to traverse tree and build binary dictionary
-
-function visitNode(node, prefix) {
-  dict = [];
-  if (node.node1) {
-    dict = [...dict, ...visitNode(node.node1, prefix.concat("0"))];
-    dict = [...dict, ...visitNode(node.node2, prefix.concat("1"))];
-    return dict;
-  } else {
-    return [...dict, [node.symbol, prefix]];
-  }
 }
 
 // clean this up
 function domTree(tree, len) {
   const list = document.createElement("ul");
-  const symbol = document.createElement("li");
+  const sym = document.createElement("li");
   const freq = document.createElement("li");
 
-  list.style.padding = "10px";
-  list.style.border = "solid 1px";
-  list.style.margin = "5px";
-  list.style.width = "fit-content";
+  list.className = "node-body";
 
-  symbol.innerHTML = `symbol: ${tree.symbol}`;
-  console.log(len);
-  freq.innerHTML = `probability: ${(tree.freq / len).toFixed(3)}`; // do better
+  sym.innerHTML = `symbol: ${tree.symbol}`;
+  freq.innerHTML = `probability: ${(tree.freq / len).toFixed(3)}`;
   list.appendChild(symbol);
   list.appendChild(freq);
   if (tree.node1) {
@@ -69,6 +47,17 @@ function domTree(tree, len) {
     list.appendChild(nodes);
   }
   return list;
+}
+
+function visitNode(node, prefix) {
+  dict = [];
+  if (node.node1) {
+    dict = [...dict, ...visitNode(node.node1, prefix.concat("0"))];
+    dict = [...dict, ...visitNode(node.node2, prefix.concat("1"))];
+    return dict;
+  } else {
+    return [...dict, [node.symbol, prefix]];
+  }
 }
 
 function makeTree(arr) {
@@ -105,4 +94,4 @@ function getFrequency(str) {
   return freqArr;
 }
 
-submitBtn.addEventListener("click", getString);
+submit.addEventListener("click", getString);
