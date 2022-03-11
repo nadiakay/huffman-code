@@ -1,13 +1,15 @@
 const textBox = document.getElementById("str-in");
 const submit = document.getElementById("submit");
-const output = document.getElementById("out");
 
 const codeDiv = document.getElementById("code");
 const treeDiv = document.getElementById("tree");
 const dictDiv = document.getElementById("dict");
 
 function getString() {
-  output.innerHTML = "";
+  codeDiv.innerHTML = "";
+  treeDiv.innerHTML = "";
+  dictDiv.innerHTML = "";
+
   const str = textBox.value;
   const freqArr = getFrequency(str);
   const tree = makeTree(freqArr);
@@ -31,7 +33,7 @@ function domTree(tree, len) {
 
   sym.innerHTML = `symbol: ${tree.symbol}`;
   freq.innerHTML = `probability: ${(tree.freq / len).toFixed(3)}`;
-  list.appendChild(symbol);
+  list.appendChild(sym);
   list.appendChild(freq);
   if (tree.node1) {
     const nodes = document.createElement("ul");
