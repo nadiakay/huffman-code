@@ -16,6 +16,9 @@ function doString() {
   treeDiv.appendChild(domTree(tree[0], str.length))
 
   dict = visitNode(tree[0], '')
+
+  console.log('dict: ', dict)
+
   dict.forEach((item) => {
     const p = document.createElement('p')
     p.innerHTML = `${item[0]}: ${item[1]}`
@@ -75,6 +78,7 @@ function visitNode(node, prefix) {
 }
 
 function makeTree(arr) {
+  console.log('makeTree arr in: ', arr)
   const tree = []
   arr.forEach((item) => tree.push(item))
   let newNode
@@ -90,10 +94,12 @@ function makeTree(arr) {
     tree.push(newNode)
     tree.sort((a, b) => b.freq - a.freq)
   }
+  console.log('... tree out: ', tree)
   return tree
 }
 
 function getFrequency(str) {
+  console.log('getFrequency: str in: ', str)
   const freqs = [...str].reduce(
     (freq, sym) => Object.assign(freq, { [sym]: (freq[sym] || 0) + 1 }),
     {}
@@ -105,6 +111,7 @@ function getFrequency(str) {
   })
   freqArr.sort((a, b) => b.freq - a.freq)
 
+  console.log('...freqArr out: ', freqArr)
   return freqArr
 }
 

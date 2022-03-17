@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="Nadia Konieczny homepage">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Huffman Code - About</title>
+</head>
+
+<body>
+
+  <main>
+    <h2>About the Huffman Code Algorithm</h2>
+    <p>Are you fascinated by data but overwhelmed by its sheer quantity? Are you running out of storage space often, or
+      encountering slow speeds when uploading or downloading? Then you probably understand how useful compression can
+      be. In this article I describe a simple but clever encoding technique widely used for compression, and present <a
+        href="./index.html">an
+        interactive app</a> to visualize the process.</p>
+
+    <p>Huffman code is an optimal prefix code for lossless data compression. A Huffman code algorithm assigns a binary
+      value to
+      each symbol in the input to be encoded.</p>
+
+    <p>To understand how encoding works, let&rsquo;s think about how to encode a message in binary. This will let us
+      store and transmit the message digitally across computer networks so we can save its contents or share it with
+      others.</p>
+
+    <p>Since we want to compress the message as much as possible, we want to use the smallest binary values possible,
+      while still creating a uniquely decodable binary string. That is, given a string of binary digits without gaps
+      between the digits, we should be able to unambiguously decode each symbol in the string in sequence to find the
+      original message. This is possible with a prefix code, an encoding scheme where no code word is a prefix (initial
+      segment) of any other code word.</p>
+
+    <p>For example, consider this set of code words:</p>
+
+    <p class="code">{0, 10, 110, 111}</p>
+
+    <p>No code word appears as a prefix to any other code word. So, given the following encoded string:</p>
+
+    <p class="code">01111101010</p>
+
+    <p>We can start from the left and differentiate code words. We start with a &lsquo;0&rsquo;, and since only one word
+      starts with a &lsquo;0&rsquo;, that must be the first code word. Next we see three 1&rsquo;s in a row, which must
+      be &lsquo;111&rsquo;, and we can continue on like this to find the remaining code words:</p>
+
+    <p class="code">0, 111, 110, 10, 10</p>
+
+    <p>Now in order to encode a message in such a scheme, we need some way to assign each symbol in the message to a
+      unique code. Our goal is compression, so we want to use the smallest code words to represent our symbols. And
+      since some symbols will (generally) appear more frequently than others in a message, the optimal way to do that is
+      to assign the smallest code words to the most frequently occurring symbols.</p>
+
+    <p>Let&rsquo;s try to encode a very short message: for example, &lsquo;message&rsquo;. First we want to know how
+      frequently each character occurs. Let&rsquo;s count them:</p>
+
+    <div class="code">
+      <p>a: 1</p>
+      <p>e: 2</p>
+      <p>g: 1</p>
+      <p>m: 1</p>
+      <p>s: 2</p>
+    </div>
+
+    <p>So we want to assign the longest codes to the &lsquo;a&rsquo;, &lsquo;g&rsquo;, and &lsquo;m&rsquo;, and the
+      shortest to &lsquo;e&rsquo; and &lsquo;s&rsquo;.</p>
+
+    <p>To determine an encoding we can build up a binary tree, where each branch of the tree represents a 1 or 0, and
+      each leaf of the tree is a different symbol.</p>
+    <p>The insight behind Huffman&rsquo;s coding scheme is that we can build such a tree from the bottom up: we can
+      start with the least frequently occurring symbols and connect them by branches to nodes a higher step up. Then we
+      can treat those nodes as symbols with their own frequencies being the sum of each child&rsquo;s frequency, and
+      replace the two children with the parent node. We can continue to pair the two least frequent symbols or nodes in
+      our list until we have only two items left, which we pair together to form the final binary tree.</p>
+
+    <p>Let&rsquo;s try it!</p>
+
+    <p>First we want to sort our frequency list from above by frequency:</p>
+
+    <div class="code">
+      <p>e: 2</p>
+      <p>s: 2</p>
+      <p>a: 1</p>
+      <p>g: 1</p>
+      <p>m: 1</p>
+    </div>
+
+    <p>We pair together the bottom two items of the list, add their frequencies, and sort the list again:</p>
+
+    <div class="code">
+      <p>e: 2</p>
+      <p>{g,m}: 2</p>
+      <p>s: 2</p>
+      <p>a: 1</p>
+    </div>
+
+    <p>And repeat until we have our tree:</p>
+
+    <div class="code">
+      <p>{s, a}: 3</p>
+      <p>e: 2</p>
+      <p>{g, m}: 2</p>
+    </div>
+
+    <div class="code">
+      <p>{s, a}: 3</p>
+      <p>{e, {g, m}}: 4</p>
+    </div>
+
+    <div class="code">
+      <p>{{s, a}, {e, {g, m}}}: 7</p>
+    </div>
+
+    <p>The summed frequencies equal the length of the original message, as we should expect.</p>
+
+    <p>Now we just assign binary values to each branch in the tree, with a 1 and a 0 for each branch of each fork. Each
+      symbol&rsquo;s code is given by the digits of each branch tracing down from the root to leaf.</p>
+
+    <p>Finally, we have our dictionary:</p>
+    <div class="code">
+      <p>s: 00</p>
+      <p>a: 01</p>
+      <p>e: 10</p>
+      <p>g: 110</p>
+      <p>m: 111</p>
+    </div>
+
+    <p>And we can encode our original message into a binary string:</p>
+
+    <p class="code">
+      message =&gt; 1111000000111010
+    </p>
+
+    <p>Notice that the code words have the prefix property: no code word appears as a prefix of another. And the most
+      frequently occurring symbols, &lsquo;s&rsquo; and &lsquo;a&rsquo;, are assigned the smallest code words. This
+      means our encoding meets the two desirable criteria we outlined above: it is uniquely decodable, and it optimally
+      compresses symbols by frequency.</p>
+
+    <p>Following the same process, we can encode any digitally representable data. You can try it out with <a
+        href="./index.html">this Javascript app</a>: just enter some text, and it&rsquo;ll show you the binary tree,
+      dictionary, and encoded binary
+      string.</p>
+
+    <p>I hope you found this explanation helpful or interesting. This is my first article on a technical subject, so
+      please alert me of any errors and let me know if you found anything unclear. Have fun encoding!</p>
+  </main>
+
+  <footer>
+    by <a href="https://nadiakonieczny.com">Nadia</a>
+  </footer>
+</body>
+
+</html>

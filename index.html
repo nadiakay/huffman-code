@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Huffman Encoding Demonstration</title>
-  </head>
 
-  <body>
-    <h1>Huffman Encoding Demonstration</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Huffman Encoding Demonstration</title>
+</head>
+
+<body>
+  <header>
+    <h1>Huffman Code Demonstration</h1>
+    <a href="https://github.com/nadiakay/huffman-code">
+      <img src="GitHub-Mark-32px.png" class="git-icon" alt="GitHub logo" /></a>
+  </header>
+  <div>
+    <p>Huffman coding is a lossless compression technique that encodes data using a frequency-sorted binary tree to
+      assign prefix codes to symbols. <a href="huffman.html">Read more...</a></p>
     <p>Enter a string of characters:</p>
     <form action="javascript:void(0)">
       <input type="textbox" id="str-in" placeholder="enter text" />
-      <input type="submit" id="submit" value="Encode" />
+      <input type="submit" id="submit" class="button" value="Encode" />
     </form>
-    <p id="out"></p>
-    <h2>Binary Encoding:</h2>
-    <div id="code"></div>
-    <h2>Binary Tree:</h2>
-    <div id="tree"></div>
-    <h2>Dictionary:</h2>
-    <div id="dict"></div>
-    <script src="app.js"></script>
-  </body>
+  </div>
+  <p id="out"></p>
+  <h2>Binary Encoding:</h2>
+  <div id="code"></div>
+  <h2>Binary Tree:</h2>
+  <div id="tree"></div>
+  <h2>Dictionary:</h2>
+  <div id="dict"></div>
+  <footer>
+    by <a href="https://nadiakonieczny.com">Nadia</a>
+  </footer>
+  <script src="app.js"></script>
+</body>
+
 </html>

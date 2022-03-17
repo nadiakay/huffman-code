@@ -1,5 +1,68 @@
+@font-face {
+  font-family: CharisSILW;
+  src: url(fonts/CharisSIL-Regular.woff2);
+}
+
+@font-face {
+  font-family: CharisSILW;
+  font-weight: bold;
+  src: url(fonts/CharisSIL-Bold.woff2);
+}
+
+header {
+  display: flex;
+  align-items: top;
+  justify-content: space-between;
+  width: 100%;
+}
+
+body {
+  font-family: CharisSILW, sans-serif;
+  color: #333;
+  margin: 40px;
+}
+
+main {
+  margin: 40px auto;
+  max-width: 800px;
+}
+
+div {
+  padding-left: 20px;
+  padding-bottom: 15px;
+}
+
+h1 {
+  margin-top: 0;
+  font-weight: normal;
+}
+
+a {
+  color: #333;
+}
+
+p {
+  max-width: 800px;
+}
+
 ul {
   list-style-type: none;
+}
+
+form {
+  margin: 30px 0;
+}
+
+input {
+  border: solid 1px #555;
+  border-radius: 4px;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 4px;
+}
+
+.button {
+  color: #333;
+  font-weight: bold;
 }
 
 .node-body {
@@ -7,4 +70,13 @@ ul {
   border: solid 1px;
   margin: 5px;
   width: fit-content;
+}
+
+.code {
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px 20px;
+}
+
+footer {
+  text-align: center;
 }
